@@ -49,6 +49,12 @@ func ValidateStruct(s interface{}) map[string]string {
 				message = fmt.Sprintf("%s must be greater than or equal to %s", fieldName, err.Param())
 			case "lte":
 				message = fmt.Sprintf("%s must be less than or equal to %s", fieldName, err.Param())
+			case "boolean":
+				message = fmt.Sprintf("%s must be boolean", fieldName)
+			case "contains":
+				message = fmt.Sprintf("\"%s\" must contain \"%s\"", fieldName, err.Param())
+			case "number":
+				message = fmt.Sprintf("\"%s\" must be number", fieldName)
 			default:
 				message = fmt.Sprintf("%s is not valid", fieldName)
 			}
