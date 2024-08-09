@@ -31,9 +31,9 @@ func ValidateStruct(s interface{}) map[string]string {
 	for _, err := range err.(validator.ValidationErrors) {
 		// Reflectively get the field value
 		field, _ := val.Elem().FieldByName(err.Field())
+		fieldName := field.Name
 		var message string
 		message, ok := field.Tag.Lookup("error_message")
-		fieldName := field.Name
 
 		if !ok {
 			switch err.Tag() {
@@ -54,7 +54,7 @@ func ValidateStruct(s interface{}) map[string]string {
 			}
 		}
 
-		errors[err.Field()] = message
+		errors[fieldName] = message
 	}
 
 	return errors
